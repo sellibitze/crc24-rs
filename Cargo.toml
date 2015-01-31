@@ -2,5 +2,10 @@
 name = "crc24"
 version = "0.0.1"
 authors = ["Sebastian Gesemann <s.gesemann@gmail.com>"]
+license = "MIT/Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/sellibitze/crc24-rs"
+homepage = "https://github.com/sellibitze/crc24-rs"
+description = "CRC-24 implementation (IETF RFC2240-compatible)"
+keywords = ["CRC-24", "CRC24", "CRC", "checksum"]
 build = "src/tablegen.rs"
-
