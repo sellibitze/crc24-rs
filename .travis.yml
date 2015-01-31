@@ -1,1 +1,15 @@
 language: rust
+script:
+  - cargo build --verbose
+  - cargo test --verbose
+  - cargo doc
+after_success: |
+  [ $TRAVIS_BRANCH = master ] &&
+  [ $TRAVIS_PULL_REQUEST = false ] &&
+  curl http://www.rust-ci.org/artifacts/put?t=$RUSTCI_TOKEN | sh
+env:
+  global:
+    - secure: jy9n2cGRAaxokVuabE2wWVrA1HAFEwoIsbbCBnu88FFta5TebvYhZUxzjlmxh/yg3Qw3C6FXLDAxnawUOdOmCyZgunyVk3stSjp5yFQ1zBxtvhAWySC+Ncm1h8rOUNJlvlIC7ZHWOeE/UjtbdqI7Q+1m+DL4ejs2HSrotJqhQfg=
+notifications:
+  email:
+    on_success: never
