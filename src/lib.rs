@@ -1,4 +1,4 @@
-//! Crate provoding a CRC-24 hasher based on IETF RFC2440 specification.
+//! Crate provoding a CRC-24 hasher based on the IETF RFC2440 specification.
 
 #![feature(hash)]
 
@@ -16,24 +16,25 @@ pub struct Crc24Hasher {
 }
 
 impl Crc24Hasher {
-	/// creates a new CRC-24 hasher initialized with the given state
+	/// Creates a new CRC-24 hasher initialized with the given state.
 	pub fn init(v: u32) -> Crc24Hasher {
 		Crc24Hasher { state: v & 0xFFFFFF }
 	}
 }
 
 impl Default for Crc24Hasher {
-	/// creates a new CRC-24 hasher initialized with a nonzero state
-	/// specified in RFC2240
+	/// Creates a new CRC-24 hasher initialized with a nonzero state
+	/// specified in RFC2440.
 	fn default() -> Crc24Hasher {
 		Crc24Hasher { state: INIT }
 	}
 }
 
 impl Hasher for Crc24Hasher {
+	/// Only the lowest 24 bits are used.
 	type Output = u32;
 
-	/// resets the state to the special nonzero value specified RFC2240
+	/// Resets the state to the special nonzero value specified RFC2440.
 	fn reset(&mut self) { self.state = INIT; }
 
 	fn finish(&self) -> u32 { self.state }
@@ -50,8 +51,8 @@ impl hash::Writer for Crc24Hasher {
 	}
 }
 
-/// hashes the raw bytes using CRC-24
-/// (without including the length as part of the hash)
+/// Computes hash of the raw bytes using CRC-24
+/// (without including the length as part of the data)
 pub fn hash_raw(octets: &[u8]) -> u32 {
 	let mut h: Crc24Hasher = Default::default();
 	h.write(octets);
