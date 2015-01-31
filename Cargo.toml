@@ -1,0 +1,6 @@
+[package]
+name = "crc24"
+version = "0.0.1"
+authors = ["Sebastian Gesemann <s.gesemann@gmail.com>"]
+build = "src/tablegen.rs"
+
