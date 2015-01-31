@@ -6,6 +6,6 @@ license = "MIT/Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/sellibitze/crc24-rs"
 homepage = "https://github.com/sellibitze/crc24-rs"
-description = "CRC-24 implementation (IETF RFC2240-compatible)"
+description = "CRC-24 implementation (IETF RFC2440-compatible)"
 keywords = ["CRC-24", "CRC24", "CRC", "checksum"]
 build = "src/tablegen.rs"
