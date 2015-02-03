@@ -20,13 +20,18 @@ impl Crc24Hasher {
 	pub fn init(v: u32) -> Crc24Hasher {
 		Crc24Hasher { state: v & 0xFFFFFF }
 	}
+	/// Creates a new CRC-24 hasher initialized with a nonzero state
+	/// specified in RFC2440.
+	fn new() -> Crc24Hasher {
+		Crc24Hasher { state: INIT }
+	}
 }
 
 impl Default for Crc24Hasher {
 	/// Creates a new CRC-24 hasher initialized with a nonzero state
 	/// specified in RFC2440.
 	fn default() -> Crc24Hasher {
-		Crc24Hasher { state: INIT }
+		Crc24Hasher::new()
 	}
 }
 
