@@ -7,7 +7,7 @@ use std::os;
 use std::old_io::{ File, Writer };
 
 const INC_FILE: &'static str = "table.inc";
-const CRC24_POLY: u32 = 0x864CFB; // CRC-24 (IETF RFC2440), used by OpenPGP
+const CRC24_POLY: u32 = 0x86_4C_FB; // CRC-24 (IETF RFC2440), used by OpenPGP
 
 fn main() {
 	let dst = Path::new(os::getenv("OUT_DIR").unwrap());
@@ -20,8 +20,8 @@ fn table_gen() -> Vec<u32> {
 	for hi in 0..256u32 {
 		let mut temp = hi << 16;
 		for _ in 0..8 {
-			let x = if (temp & 0x800000) == 0 { 0 } else { CRC24_POLY };
-			temp = ((temp & 0x7FFFFF) << 1) ^ x;
+			let x = if (temp & 0x80_00_00) == 0 { 0 } else { CRC24_POLY };
+			temp = ((temp & 0x7F_FF_FF) << 1) ^ x;
 		}
 		v.push(temp);
 	}

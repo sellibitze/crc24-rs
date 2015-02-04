@@ -6,7 +6,7 @@
 use std::default::Default;
 use std::hash::{ self, Hasher, Writer };
 
-const INIT: u32 = 0xB704CE;
+const INIT: u32 = 0xB7_04_CE;
 
 include! { concat!(env!("OUT_DIR"), "/table.inc") }
 
@@ -19,7 +19,7 @@ pub struct Crc24Hasher {
 impl Crc24Hasher {
 	/// Creates a new CRC-24 hasher initialized with the given state.
 	pub fn init(v: u32) -> Crc24Hasher {
-		Crc24Hasher { state: v & 0xFFFFFF }
+		Crc24Hasher { state: v & 0xFF_FF_FF }
 	}
 	/// Creates a new CRC-24 hasher initialized with a nonzero state
 	/// specified in RFC2440.
@@ -53,7 +53,7 @@ impl hash::Writer for Crc24Hasher {
 			let index = ((octet as u32) ^ (s >> 16)) & 0xFF;
 			s = (s << 8) ^ CRC24_TABLE[index as usize];
 		}
-		self.state = s & 0xFFFFFF;
+		self.state = s & 0xFF_FF_FF;
 	}
 }
 
@@ -68,8 +68,8 @@ pub fn hash_raw(octets: &[u8]) -> u32 {
 #[cfg(test)]
 mod test {
 
-const CRC24_INIT: u32 =  0xb704ce;
-const CRC24_POLY: u32 = 0x1864cfb; // including x^24
+const CRC24_INIT: u32 = 0x__b7_04_ce;
+const CRC24_POLY: u32 = 0x1_86_4c_fb; // including x^24
 
 // directly translated from RFC2440 section 6.1.
 fn crc_octets(octets: &[u8]) -> u32 {
@@ -78,12 +78,12 @@ fn crc_octets(octets: &[u8]) -> u32 {
 		crc ^= (octet as u32) << 16;
 		for _ in 0..8 {
 			crc <<= 1;
-			if (crc & 0x1000000) != 0 {
+			if (crc & 0x1_00_00_00) != 0 {
 				crc ^= CRC24_POLY;
 			}
 		}
 	}
-	crc & 0xFFFFFF
+	crc & 0xFF_FF_FF
 }
 
 fn test_compare_impls(octets: &[u8]) -> bool {
