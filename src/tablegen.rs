@@ -1,6 +1,7 @@
 #![feature(io)]
 #![feature(os)]
 #![feature(path)]
+#![feature(core)]
 
 use std::os;
 use std::old_io::{ File, Writer };

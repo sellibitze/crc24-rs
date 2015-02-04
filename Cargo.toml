@@ -1,6 +1,6 @@
 [package]
 name = "crc24"
-version = "0.0.3"
+version = "0.1.0"
 authors = ["Sebastian Gesemann <s.gesemann@gmail.com>"]
 license = "MIT/Apache-2.0"
 readme = "README.md"

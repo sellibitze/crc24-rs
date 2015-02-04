@@ -1,6 +1,7 @@
 //! Crate providing a CRC-24 hasher based on the IETF RFC2440 specification.
 
 #![feature(hash)]
+#![feature(core)]
 
 use std::default::Default;
 use std::hash::{ self, Hasher, Writer };
@@ -22,7 +23,7 @@ impl Crc24Hasher {
 	}
 	/// Creates a new CRC-24 hasher initialized with a nonzero state
 	/// specified in RFC2440.
-	fn new() -> Crc24Hasher {
+	pub fn new() -> Crc24Hasher {
 		Crc24Hasher { state: INIT }
 	}
 }
