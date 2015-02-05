@@ -2,15 +2,16 @@
 #![feature(os)]
 #![feature(path)]
 #![feature(core)]
+#![feature(env)]
 
-use std::os;
+use std::env;
 use std::old_io::{ File, Writer };
 
 const INC_FILE: &'static str = "table.inc";
 const CRC24_POLY: u32 = 0x86_4C_FB; // CRC-24 (IETF RFC2440), used by OpenPGP
 
 fn main() {
-	let dst = Path::new(os::getenv("OUT_DIR").unwrap());
+	let dst = Path::new(&env::var("OUT_DIR").unwrap().into_string().unwrap());
 	let mut f = File::create(&dst.join(INC_FILE)).unwrap();
 	f.write_str(&*into_code(table_gen())).unwrap();
 }
