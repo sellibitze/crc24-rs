@@ -1,7 +1,6 @@
 //! Crate providing a CRC-24 hasher based on the IETF RFC2440 specification.
 
 #![feature(hash)]
-#![feature(core)]
 
 use std::default::Default;
 use std::hash::{ self, Hasher, Writer };

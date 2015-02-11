@@ -1,7 +1,6 @@
 #![feature(io)]
 #![feature(os)]
 #![feature(path)]
-#![feature(core)]
 #![feature(env)]
 
 use std::env;
