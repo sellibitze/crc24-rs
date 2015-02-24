@@ -3,7 +3,7 @@
 #![feature(hash)]
 
 use std::default::Default;
-use std::hash::{ self, Hasher, Writer };
+use std::hash::Hasher;
 
 const INIT: u32 = 0xB7_04_CE;
 
@@ -36,16 +36,8 @@ impl Default for Crc24Hasher {
 }
 
 impl Hasher for Crc24Hasher {
-	/// Only the lowest 24 bits are used.
-	type Output = u32;
+	fn finish(&self) -> u64 { self.state as u64 }
 
-	/// Resets the state to the special nonzero value specified RFC2440.
-	fn reset(&mut self) { self.state = INIT; }
-
-	fn finish(&self) -> u32 { self.state }
-}
-
-impl hash::Writer for Crc24Hasher {
 	fn write(&mut self, msg: &[u8]) {
 		let mut s = self.state;
 		for &octet in msg.iter() {
@@ -61,7 +53,7 @@ impl hash::Writer for Crc24Hasher {
 pub fn hash_raw(octets: &[u8]) -> u32 {
 	let mut h: Crc24Hasher = Default::default();
 	h.write(octets);
-	h.finish()
+	h.finish() as u32
 }
 
 #[cfg(test)]
