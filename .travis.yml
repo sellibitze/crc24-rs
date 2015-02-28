@@ -7,10 +7,10 @@ after_success: >
   [ $TRAVIS_BRANCH = master ] &&
   [ $TRAVIS_PULL_REQUEST = false ] &&
   mv target/doc . &&
-  curl http://www.rust-ci.org/artifacts/put?t=$RUSTCI_TOKEN
+  curl http://www.rust-ci.org/artifacts/put?t=$RUSTCI_TOKEN | sh
 env:
   global:
-    - secure: jy9n2cGRAaxokVuabE2wWVrA1HAFEwoIsbbCBnu88FFta5TebvYhZUxzjlmxh/yg3Qw3C6FXLDAxnawUOdOmCyZgunyVk3stSjp5yFQ1zBxtvhAWySC+Ncm1h8rOUNJlvlIC7ZHWOeE/UjtbdqI7Q+1m+DL4ejs2HSrotJqhQfg=
+    - secure: Ji6hWfugbi9TptKYiqnb8MhtgZfyLGWsmXqqdzpOsn1OcPd3UFck0+xHASRWk2LHWj1TqKXzX9sQahf+hHfFsifTbKqN4xo25gUzZ3SQKe6XQ/Z5CX/5QERiQyzxdBGpSuREXJeh34C6W71Dw+F6XVL/TWNKYhja139faMrS5h8=
 notifications:
   email:
     on_success: never
