@@ -1,18 +1,16 @@
-#![feature(env)]
-#![feature(old_io)]
-#![feature(old_path)]
-
 use std::env;
-use std::old_io as io;
-use std::old_path as path;
+use std::fs;
+use std::io::prelude::*;
+use std::path;
 
 const CRC24_POLY: u32 = 0x86_4C_FB; // CRC-24 (IETF RFC2440), used by OpenPGP
 const INC_FILE: &'static str = "table.inc";
 
 fn main() {
-	let dst = path::Path::new(&env::var("OUT_DIR").unwrap());
-	let mut f = io::File::create(&dst.join(INC_FILE)).unwrap();
-	f.write_str(&*into_code(table_gen())).unwrap();
+    let ods = env::var("OUT_DIR").unwrap();
+	let odp = path::Path::new(&ods);
+	let f = &mut fs::File::create(&odp.join(INC_FILE)).unwrap();
+	write!(f, "{}", into_code(table_gen())).unwrap();
 }
 
 fn table_gen() -> Vec<u32> {
